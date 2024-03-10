@@ -42,9 +42,7 @@ This repository contains a Risk Calculator App built using Python and PyQt5. The
 - Additionally, you can view historical data by clicking on the "View History" button.
 - To visualize the causal structure model, click on the "Train Model" button.
 
-## Contributors
-- [Contributor 1](https://github.com/contributor1)
-- [Contributor 2](https://github.com/contributor2)
+
 
 ## License
 This project is licensed under the [MIT License](LICENSE).
@@ -78,19 +76,14 @@ We expect all contributors to abide by the project's [Code of Conduct](CODE_OF_C
 
 ## Contact
 For any inquiries or support, you can reach out to the project maintainer:
-[Maintainer Name](mailto:maintainer@example.com)
+[skwanzas@gmail.com](mailto:skwanzas@gmail.com)
 
-## Release History
-- 1.0.0 (YYYY-MM-DD)
-  - Initial release
 
 ## Roadmap
 - Implement additional features for data analysis and visualization
 - Improve user interface for better user experience
 - Enhance model training and prediction capabilities
 
-## References
-- [Example Reference](https://example.com)
 
 ## Disclaimer
 This application is provided as-is, without any warranties or guarantees. Use at your own risk.
