@@ -1,0 +1,5 @@
+country,year,dnn_value,bayesian_value,rmse_nn,mape_nn,theil_nn,rmse_bayesian,mape_bayesian,theil_bayesian,performing_loans_ratio,product_gap,capital_ratio
+Germany,2010,12.931536,16.511491140289575,3.768464279174804,22.565654366316192,1.0,0.1885088597104243,1.1287955671282892,1.0,"0    49.199902
+dtype: float64","0   -27.140567
+dtype: float64","0    261.318279
+Name: capital_ratio, dtype: float64"
