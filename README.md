@@ -90,4 +90,11 @@ This application is provided as-is, without any warranties or guarantees. Use at
 
 ---
 
+## Screenshots
+![Initial screen of the application](https://raw.githubusercontent.com/barros404/risk_app_app/main/Screenshot%20from%202024-03-16%2003-42-34.png)
+![Displaying the Report](https://github.com/barros404/risk_app_app/blob/main/Screenshot%20from%202024-03-16%2003-56-19.png?raw=true) 
+![Displaying the Report](https://github.com/barros404/risk_app_app/blob/main/Screenshot%20from%202024-03-16%2003-57-02.png?raw=true)
+![Displaying the charts](https://github.com/barros404/risk_app_app/blob/main/Screenshot%20from%202024-03-09%2015-05-28.png?raw=true)
+![ Displaying the charts](https://github.com/barros404/risk_app_app/blob/main/Screenshot%20from%202024-03-09%2015-07-47.png?raw=true)
+
 Thank you for using Risk Calculator App! We hope it serves you well in your credit risk analysis endeavors. If you have any feedback or suggestions, please don't hesitate to let us know. Happy analyzing!
