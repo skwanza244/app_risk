@@ -185,7 +185,7 @@ class RiskCalculatorApp(QWidget):
 
         self.layout = QVBoxLayout()
 
-        # Carregar o arquivo DataFrame
+        # "Load the DataFrame file."
         self.data_file_label = QLabel("Select file:")
         self.layout.addWidget(self.data_file_label)
         self.load_data_button = QPushButton("open faile")
@@ -400,21 +400,6 @@ class RiskCalculatorApp(QWidget):
         )
         predictions_df.to_csv("predictions.csv", index=False)
 
-        print("Resultado do modelo de rede neural profunda:")
-        print(
-            "Predicted credit risk value by the structural causal model.:",
-            np.mean(dnn_prediction),
-        )
-        print("MAPE:", mape_nn)
-        print("Índice de Theil:", theil_nn)
-        print("\nResultado do modelo bayesiano:")
-        print(
-            "Valor de risco de crédito previsto pelo modelo bayesiano:",
-            np.mean(y_pred_bayesian),
-        )
-        print("RMSE:", rmse_bayesian)
-        print("MAPE:", mape_bayesian)
-        print("Índice de Theil:", theil_bayesian)
         dnn_value = np.mean(dnn_prediction)
         bayesian_value = np.mean(y_pred_bayesian)
 
@@ -475,7 +460,7 @@ class RiskCalculatorApp(QWidget):
        # Implement the logic to display the causal model
         if self.data is None:
             QMessageBox.warning(
-                self, "Aviso", "Por favor, carregue um arquivo de dados primeiro."
+                self, "Notice", "Please, load a data file first."
             )
             return
         sm = StructureModel()
@@ -510,7 +495,7 @@ class RiskCalculatorApp(QWidget):
 
         plt.figure(figsize=(8, 6))
         nx.draw(sm, with_labels=True)
-        plt.title("Modelo Estrutural Causal")
+        plt.title("Causal Structural Model")
         plt.show()
         pass
 
