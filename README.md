@@ -91,7 +91,7 @@ This application is provided as-is, without any warranties or guarantees. Use at
 ---
 
 ## Screenshots
-![Initial screen of the application](https://raw.githubusercontent.com/barros404/risk_app_app/main/Screenshot%20from%202024-03-16%2003-42-34.png)
+![Initial screen of the application](https://github.com/skwanza244/app_risk/blob/master/Screenshot%20from%202024-03-16%2005-01-36.png?raw=true)
 ![Displaying the Report](https://github.com/barros404/risk_app_app/blob/main/Screenshot%20from%202024-03-16%2003-56-19.png?raw=true) 
 ![Displaying the Report](https://github.com/barros404/risk_app_app/blob/main/Screenshot%20from%202024-03-16%2003-57-02.png?raw=true)
 ![Displaying the charts](https://github.com/barros404/risk_app_app/blob/main/Screenshot%20from%202024-03-09%2015-05-28.png?raw=true)
