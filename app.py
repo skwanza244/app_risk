@@ -83,7 +83,7 @@ class ReportDialog(QDialog):
     ):
         super().__init__()
         self.setWindowTitle("Report")
-        self.setFixedSize(900, 700)  # Define tamanho fixo da janela
+        self.setFixedSize(900, 700)  # Define fixed window size
 
         self.layout = QVBoxLayout()
 
@@ -98,6 +98,7 @@ class ReportDialog(QDialog):
         performing_loans_ratio = filtered_data["performing_loans_ratio"].iloc[0]
         capital_ratio = filtered_data["capital_ratio"].iloc[0]
         product_gap = filtered_data["product_gap"].iloc[0]
+        #Construct the report text
         report_text = (
             f"<html><body>"
             f'<p style="font-family: Arial; font-size:16px; font-weight:bold"> Report on Climate Change and TCFD Recommendations</p>'
@@ -148,31 +149,31 @@ class ReportDialog(QDialog):
             f"</body></html>"
         )
 
-        # Configurando a label com o texto formatado
+       # Setting up the label with formatted text
         self.label = QLabel(report_text)
-        self.label.setAlignment(Qt.AlignJustify)  # Justifica o texto
-        self.label.setWordWrap(True)  # Habilita a quebra de linha
+        self.label.setAlignment(Qt.AlignJustify)  
+        self.label.setWordWrap(True)  
         self.layout.addWidget(self.label)
 
-        # Criando a área de rolagem apenas na vertical
+        # Creating the scroll area for vertical scrolling only
         scroll_area = QScrollArea()
         scroll_area.setWidgetResizable(True)
         scroll_area.setWidget(self.label)
         scroll_area.setVerticalScrollBarPolicy(
             Qt.ScrollBarAlwaysOn
-        )  # Adiciona barra de rolagem apenas na vertical
+        )  
 
         self.layout.addWidget(
             scroll_area
-        )  # Adiciona a área de rolagem ao layout principal
+        ) 
 
-        # Definindo o tamanho da fonte
+        
         font = QFont("Arial", 12)
         self.label.setFont(font)
 
         self.setLayout(self.layout)
 
-        # Configurando o estilo da janela
+        # Setting up the window style
         self.setStyleSheet("background-color: white; padding: 5px;")
 
 
@@ -180,7 +181,7 @@ class RiskCalculatorApp(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Generete Report")
-        self.setFixedSize(500, 400)  # Definindo o tamanho da tela
+        self.setFixedSize(500, 400)  
 
         self.layout = QVBoxLayout()
 
@@ -191,19 +192,19 @@ class RiskCalculatorApp(QWidget):
         self.load_data_button.clicked.connect(self.load_data)
         self.layout.addWidget(self.load_data_button)
 
-        # ComboBox para seleção de país
+        # "ComboBox for country selection"
         self.country_label = QLabel("Select Country:")
         self.layout.addWidget(self.country_label)
         self.country_combo = QComboBox()
         self.layout.addWidget(self.country_combo)
 
-        # ComboBox para seleção de ano
+        # "ComboBox for year selection"
         self.year_label = QLabel("Select Year:")
         self.layout.addWidget(self.year_label)
         self.year_combo = QComboBox()
         self.layout.addWidget(self.year_combo)
 
-        # Botões
+        #"Buttons"
         self.buttons_layout = QHBoxLayout()
 
         self.calculate_button = QPushButton("Generete Report")
@@ -244,14 +245,14 @@ class RiskCalculatorApp(QWidget):
     def show_report(self):
         if self.data is None:
             QMessageBox.warning(
-                self, "Aviso", "Por favor, carregue um arquivo de dados primeiro."
+                self, "Notice", "Please, load a data file first.."
             )
             return
 
         country = self.country_combo.currentText()
         year = int(self.year_combo.currentText())
 
-        # Filtrar os dados para o país e ano selecionados
+        #"Filter the data for the selected country and year."
         filtered_data = self.data[
             (self.data["country"] == country) & (self.data["year"] == year)
         ]
@@ -263,7 +264,7 @@ class RiskCalculatorApp(QWidget):
         sum3 = w3 * math.sqrt(255) + w3
 
         volatilidadeComposta = w1 + w2 + w3
-        # Verificar se há dados suficientes
+        # "Check if there is enough data."
         if len(filtered_data) < 2:
             print(
                 "There are not enough data to split between training and test sets. Using all the data for training."
@@ -277,16 +278,16 @@ class RiskCalculatorApp(QWidget):
             X = filtered_data[["temperature", "precipitation", "co2_emissions"]]
             y = volatilidadeComposta
 
-            # Normalizar os dados
+            #"Normalize the data."
             scaler = StandardScaler()
             X_scaled = scaler.fit_transform(X)
 
-            # Dividir os dados em conjuntos de treinamento e teste
+            #"Split the data into training and testing sets."
             X_train, X_test, y_train, y_test = train_test_split(
                 X_scaled, y, test_size=0.2, random_state=42
             )
 
-        # Construir o modelo de rede neural profunda com camadas LSTM
+        # Build the deep neural network model with LSTM layers
         model = tf.keras.Sequential(
             [
                 tf.keras.layers.Reshape(
@@ -297,13 +298,13 @@ class RiskCalculatorApp(QWidget):
             ]
         )
 
-        # Compilar o modelo
+        # Compile the model.
         model.compile(loss="mse", optimizer="adam")
 
-        # Treinar o modelo
+        # Train the model.
         model.fit(X_train, y_train, epochs=100, batch_size=32, verbose=0)
 
-        # Avaliar o modelo
+        # Evaluate the model.
         dnn_prediction = model.predict(X_test)
         rmse_nn = np.sqrt(mean_squared_error(y_test, dnn_prediction))
         mape_nn = (
@@ -322,7 +323,7 @@ class RiskCalculatorApp(QWidget):
             )
         )
 
-        # Construir o modelo bayesiano
+        # Build the Bayesian model.
 
         with pm.Model() as bayesian_model:
             alpha = pm.Normal("alpha", mu=0, sigma=10)
@@ -336,7 +337,7 @@ class RiskCalculatorApp(QWidget):
 
             trace = pm.sample(1000, tune=1000, cores=1)
 
-        # Avaliar o modelo bayesiano
+          # Evaluate the Bayesian model.
         y_pred_trace = pm.sample_posterior_predictive(
             trace, samples=500, model=bayesian_model
         )
@@ -358,14 +359,14 @@ class RiskCalculatorApp(QWidget):
             )
         )
 
-        # Construir e treinar o modelo de regressão linear
+        #  Build and train the linear regression model
         linear_model = LinearRegression()
         linear_model.fit(X_train, y_train)
 
-        # Fazer previsões com o modelo treinado
+        # Make predictions with the trained model.
         linear_predictions = linear_model.predict(X_test)
 
-        # Calcular métricas de erro para regressão linear
+        # Calculate error metrics for linear regression.
         rmse_linear = np.sqrt(mean_squared_error(y_test, linear_predictions))
         mape_linear = np.mean(np.abs((y_test - linear_predictions) / y_test)) * 100
         theil_linear = np.sqrt(
@@ -375,23 +376,11 @@ class RiskCalculatorApp(QWidget):
                 + mean_squared_error(y_test, y_test)
             )
         )
-        # Exiba os resultados
-        print("Resultado do modelo Decision Tree:")
-        print("MAE:", rmse_linear)
-        print("R2:", mape_linear)
-        print("theail:", theil_linear)
-        print("\nResultado do modelo bayesiano:")
-        print(
-            "Valor de risco de crédito previsto pelo modelo bayesiano:",
-            np.mean(y_pred_bayesian),
-        )
-        print("RMSE:", rmse_bayesian)
-        print("MAPE:", mape_bayesian)
-        print("Índice de Theil:", theil_bayesian)
+        
         dnn_value = np.mean(dnn_prediction)
         bayesian_value = np.mean(y_pred_bayesian)
 
-        # Save predictions to CSV
+        # Save predictions to CSV file.
         predictions_df = pd.DataFrame(
             {
                 "country": [country],
@@ -452,9 +441,7 @@ class RiskCalculatorApp(QWidget):
         ssigma = trace["sigma"].mean()
         predictions_df.to_csv("predictions.csv", index=False)
 
-        # Store data in SQLite database
-
-        # Mostrar o relatório com os valores calculados
+        # Show the report with the calculated values
         dialog = ReportDialog(
             country,
             year,
@@ -485,7 +472,7 @@ class RiskCalculatorApp(QWidget):
         dialog.exec_()
 
     def show_causal_model(self):
-        # Implemente a lógica para exibir o modelo causal
+       # Implement the logic to display the causal model
         if self.data is None:
             QMessageBox.warning(
                 self, "Aviso", "Por favor, carregue um arquivo de dados primeiro."
@@ -495,14 +482,14 @@ class RiskCalculatorApp(QWidget):
         country = self.country_combo.currentText()
         year = int(self.year_combo.currentText())
 
-        # Filtrar os dados para o país e ano selecionados
+        # "Filter the data for the selected country and year."
         filtered_data = self.data[
             (self.data["country"] == country) & (self.data["year"] == year)
         ]
         dfp = pd.get_dummies(filtered_data, columns=["country"])
         sm = from_pandas(dfp)
 
-        # Adicionar as arestas que representam as relações causais entre as variáveis
+        # "Add the edges representing the causal relationships between the variables."
         sm.add_edges_from(
             [
                 ("temperature", "credit_risk"),
@@ -511,12 +498,12 @@ class RiskCalculatorApp(QWidget):
             ]
         )
 
-        # Remover as arestas que têm um valor de p inferior a 0.05
+        #"Remove the edges that have a p-value lower than 0.05."
         for edge in list(sm.edges()):
             if sm[edge[0]][edge[1]]["weight"] < 0.05:
                 sm.remove_edge(edge[0], edge[1])
 
-        # Remover os nós que não têm nenhuma aresta
+        # "Remove the nodes that do not have any edges."
         for node in sm.nodes():
             if sm.degree(node) == 0:
                 sm.remove_node(node)
