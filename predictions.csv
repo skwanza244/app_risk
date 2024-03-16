@@ -1,5 +1,5 @@
 country,year,dnn_value,bayesian_value,rmse_nn,mape_nn,theil_nn,rmse_bayesian,mape_bayesian,theil_bayesian,performing_loans_ratio,product_gap,capital_ratio
-Spain,2024,2.370837,2.470837,0.18,"0.22
+Spain,2024,0.2370837,0.2470837,0.18,"0.22
 
 ",0.67,"0.16
 ","0.25
